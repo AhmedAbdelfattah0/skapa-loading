@@ -28,8 +28,8 @@ export class SkapaLoadingService {
   }
 
 
-  getLanguageConstants() {
-    if (localStorage.getItem('ln') === 'ar') {
+  getLanguageConstants(lang:string) {
+    if (lang === 'ar') {
       return of({
         direction: 'rtl',
         languageConstant: languageConstants.ar

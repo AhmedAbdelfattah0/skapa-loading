@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { CUSTOM_ELEMENTS_SCHEMA, Component, DestroyRef, OnInit } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, Component, DestroyRef, Input, OnInit } from '@angular/core';
 import { Subscription, Observable, combineLatest, takeUntil, interval } from 'rxjs';
 import { SkapaLoadingService } from './skapa-loading.service';
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
@@ -20,12 +20,12 @@ export class SkapaLoadingComponent implements OnInit {
   intervalId!: number;
   loadingIncrementalCounter = 1;
   selectedLang: any;
-
+@Input() lang:string='en'
 
   constructor(private destroyRef: DestroyRef, private SkapaLoadingService: SkapaLoadingService) {
 
 
-    let obs1 = this.SkapaLoadingService.getLanguageConstants() as Observable<any>;
+    let obs1 = this.SkapaLoadingService.getLanguageConstants(this.lang) as Observable<any>;
 
     let obs2 = this.SkapaLoadingService.loadingState as Observable<any>;
 
