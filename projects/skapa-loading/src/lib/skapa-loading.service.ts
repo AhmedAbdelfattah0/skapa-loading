@@ -12,15 +12,12 @@ import { languageConstants } from './translation.constant';
 export class SkapaLoadingService {
   loadingState: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   dialog: MatDialog
-  dialogRef: MatDialogRef<SkapaLoadingComponent>
-  @Inject(MAT_DIALOG_DATA) public data: Dialog | any
-  constructor(
+    constructor(
     injector: Injector
 
   ) {
      this.dialog = injector.get(MatDialog)
-     this.dialogRef =  injector.get(MatDialogRef<SkapaLoadingComponent>)
-  }
+   }
 
   // triger an event to show the loading spinner with diffrent text on init
   showLoader() {

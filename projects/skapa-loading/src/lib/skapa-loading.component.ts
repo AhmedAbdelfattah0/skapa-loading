@@ -20,21 +20,16 @@ export class SkapaLoadingComponent implements OnInit {
   intervalId!: number;
   loadingIncrementalCounter = 1;
   selectedLang: any;
-@Input() lang:string='en'
+  @Input() lang: string = 'en'
 
-  constructor(private destroyRef: DestroyRef, private SkapaLoadingService: SkapaLoadingService) {
+  constructor(private SkapaLoadingService: SkapaLoadingService) {
 
-
-
-    // let obs2 = this.SkapaLoadingService.loadingState as Observable<any>;
-
-    // res and obs needs to be renamed for better readability.
-    this.SkapaLoadingService.loadingState.pipe(takeUntilDestroyed(this.destroyRef))
+    this.SkapaLoadingService.loadingState.pipe(takeUntilDestroyed())
       .subscribe((res) => {
         if (res) {
           this.selectedLang = this.SkapaLoadingService.getLanguageConstants(this.lang);
           console.log('====================================');
-          console.log(this.selectedLang,this.lang);
+          console.log(this.selectedLang, this.lang);
           console.log('====================================');
           this.isLoading = res;
           this.loadingStateChange();
