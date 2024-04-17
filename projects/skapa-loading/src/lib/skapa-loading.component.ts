@@ -27,7 +27,7 @@ export class SkapaLoadingComponent implements OnInit {
     this.SkapaLoadingService.loadingState.pipe(takeUntilDestroyed())
       .subscribe((res) => {
         if (res) {
-          this.selectedLang = this.SkapaLoadingService.getLanguageConstants(this.lang);
+          this.selectedLang = this.SkapaLoadingService.getLanguageConstants(this.lang).languageConstant;
           console.log('====================================');
           console.log(this.selectedLang, this.lang);
           console.log('====================================');
