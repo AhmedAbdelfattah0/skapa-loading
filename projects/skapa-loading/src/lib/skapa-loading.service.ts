@@ -30,15 +30,15 @@ export class SkapaLoadingService {
 
   getLanguageConstants(lang:string) {
     if (lang === 'ar') {
-      return of({
+      return {
         direction: 'rtl',
         languageConstant: languageConstants.ar
-      })
+      }
     } else {
-      return of({
+      return {
         direction: 'ltr',
         languageConstant: languageConstants.en
-      })
+      }
     }
   }
 }

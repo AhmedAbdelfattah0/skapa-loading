@@ -25,17 +25,18 @@ export class SkapaLoadingComponent implements OnInit {
   constructor(private destroyRef: DestroyRef, private SkapaLoadingService: SkapaLoadingService) {
 
 
-    let obs1 = this.SkapaLoadingService.getLanguageConstants(this.lang) as Observable<any>;
 
-    let obs2 = this.SkapaLoadingService.loadingState as Observable<any>;
+    // let obs2 = this.SkapaLoadingService.loadingState as Observable<any>;
 
     // res and obs needs to be renamed for better readability.
-    combineLatest([obs1, obs2])
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(([res1, res2]) => {
-        if (res1 && res2) {
-          this.selectedLang = res1;
-          this.isLoading = res2;
+    this.SkapaLoadingService.loadingState.pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((res) => {
+        if (res) {
+          this.selectedLang = this.SkapaLoadingService.getLanguageConstants(this.lang);
+          console.log('====================================');
+          console.log(this.selectedLang,this.lang);
+          console.log('====================================');
+          this.isLoading = res;
           this.loadingStateChange();
           this.loadingState = this.selectedLang?.LOADING;
           const source = interval(5000);
@@ -43,7 +44,7 @@ export class SkapaLoadingComponent implements OnInit {
             this.loadingStateChange()
           );
         } else {
-          this.isLoading = res2;
+          this.isLoading = res;
         }
       });
   }
