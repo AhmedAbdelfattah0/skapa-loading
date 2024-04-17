@@ -8,6 +8,7 @@
   "dependencies": {
     "@angular/cdk": "^17.3.4",
     "@angular/material": "^17.3.4",
+    "@ingka/loading-webc": "^0.2.1",
     "tslib": "^2.3.0"
   },
   "sideEffects": false
