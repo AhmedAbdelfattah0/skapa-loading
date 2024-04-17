@@ -1,4 +1,4 @@
-import { Inject, Injectable, TemplateRef, inject } from '@angular/core';
+import { Inject, Injectable, Injector, TemplateRef, inject } from '@angular/core';
 import { BehaviorSubject, of } from 'rxjs';
 
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
@@ -11,13 +11,16 @@ import { languageConstants } from './translation.constant';
 })
 export class SkapaLoadingService {
   loadingState: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-
+  dialog: MatDialog
+  dialogRef: MatDialogRef<SkapaLoadingComponent>
+  @Inject(MAT_DIALOG_DATA) public data: Dialog | any
   constructor(
-    public dialog: MatDialog, public dialogRef: MatDialogRef<SkapaLoadingComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Dialog | any
+    injector: Injector
 
-    )
-  {}
+  ) {
+     this.dialog = injector.get(MatDialog)
+     this.dialogRef =  injector.get(MatDialogRef<SkapaLoadingComponent>)
+  }
 
   // triger an event to show the loading spinner with diffrent text on init
   showLoader() {
@@ -28,7 +31,7 @@ export class SkapaLoadingService {
   }
 
 
-  getLanguageConstants(lang:string) {
+  getLanguageConstants(lang: string) {
     if (lang === 'ar') {
       return {
         direction: 'rtl',
