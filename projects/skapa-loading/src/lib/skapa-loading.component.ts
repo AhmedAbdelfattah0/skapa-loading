@@ -20,7 +20,7 @@ export class SkapaLoadingComponent implements OnInit {
   intervalId!: number;
   loadingIncrementalCounter = 1;
   selectedLang: any;
-  @Input() lang: string = 'en'
+  @Input() lang: string
 
   constructor(private SkapaLoadingService: SkapaLoadingService) {
 
