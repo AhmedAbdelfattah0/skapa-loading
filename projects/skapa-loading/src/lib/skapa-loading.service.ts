@@ -29,12 +29,15 @@ export class SkapaLoadingService {
 
 
   getLanguageConstants(lang: string) {
+    console.log('====================================');
+    console.log(lang,'lang');
+    console.log('====================================');
     if (lang === 'ar') {
       return {
         direction: 'rtl',
         languageConstant: languageConstants.ar
       }
-    } else {
+    } else if (lang === 'en'){
       return {
         direction: 'ltr',
         languageConstant: languageConstants.en
