@@ -1,5 +1,5 @@
 {
-  "name": "skapa-loading",
+  "name": "ngx-skapa-loading",
   "version": "1.4.0",
   "peerDependencies": {
     "@angular/common": "^17.3.0",
