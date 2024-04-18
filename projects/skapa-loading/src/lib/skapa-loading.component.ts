@@ -6,7 +6,7 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import '@ingka/loading-webc';
 
 @Component({
-  selector: 'lib-skapa-loading',
+  selector: 'ngx-skapa-loading',
   standalone: true,
   templateUrl: './skapa-loading.component.html',
   styleUrl: './skapa-loading.component.css',

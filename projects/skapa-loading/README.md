@@ -3,22 +3,46 @@
 This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.0.
 
 ## Code scaffolding
+# NGX SKAPA LOADING BALL
 
-Run `ng generate component component-name --project skapa-loading` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project skapa-loading`.
-> Note: Don't forget to add `--project skapa-loading` or else it will be added to the default project in your `angular.json` file. 
+NGX SKAPA LOADING is an Angular library for loading-page showing a dynamically multi-lang changed message with SKAPA loading bouncing ball.
 
-## Build
+## Installation
 
-Run `ng build skapa-loading` to build the project. The build artifacts will be stored in the `dist/` directory.
+Use the package manager [npm](https://nodejs.org/en) to install SKAPA-LOADING.
 
-## Publishing
+```npm
+npm install skapa-loading
+```
 
-After building your library with `ng build skapa-loading`, go to the dist folder `cd dist/skapa-loading` and run `npm publish`.
+## Usage
 
-## Running unit tests
+```angular
+ import { SkapaLoadingComponent, SkapaLoadingService } from 'ngx-skapa-loading';
+```
+## DI the service 
+```
+   constructor(private SkapaLoadingService: SkapaLoadingService) {}
+```
 
-Run `ng test skapa-loading` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## to show the loader 
+```
+ this.SkapaLoadingService.showLoader();
+```
 
-## Further help
+## to hide the loader 
+```
+ this.SkapaLoadingService.hideLoader();
+```
+## HTML
+```html
+<ngx-skapa-loading [lang]="'ar'"></ngx-skapa-loading>
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Contributing
+
+Pull requests are welcome. For major changes, please open an issue first
+to discuss what you would like to change.
+
+Please make sure to update tests as appropriate.
+
