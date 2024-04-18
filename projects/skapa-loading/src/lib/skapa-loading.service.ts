@@ -28,7 +28,7 @@ export class SkapaLoadingService {
   }
 
 
-  getLanguageConstants(lang: string) {
+  getLanguageConstants(lang: any) {
     console.log('====================================');
     console.log(lang,'lang');
     console.log('====================================');

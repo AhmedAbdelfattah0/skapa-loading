@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { CUSTOM_ELEMENTS_SCHEMA, Component, DestroyRef, Input, OnInit } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, Component, DestroyRef, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Subscription, Observable, combineLatest, takeUntil, interval } from 'rxjs';
 import { SkapaLoadingService } from './skapa-loading.service';
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
@@ -13,21 +13,24 @@ import '@ingka/loading-webc';
   imports: [CommonModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class SkapaLoadingComponent implements OnInit {
+export class SkapaLoadingComponent implements OnInit, OnChanges {
   isLoading = false;
   loadingState = '';
   subscription: Subscription = new Subscription;
   intervalId!: number;
   loadingIncrementalCounter = 1;
   selectedLang: any;
-  @Input() lang: string
+  @Input() lang: 'en' | 'ar'='en'
 
   constructor(private SkapaLoadingService: SkapaLoadingService) {
 
-    this.SkapaLoadingService.loadingState.pipe(takeUntilDestroyed())
+
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+    this.SkapaLoadingService.loadingState
       .subscribe((res) => {
         if (res) {
-          this.selectedLang = this.SkapaLoadingService.getLanguageConstants(this.lang).languageConstant;
+          this.selectedLang = this.SkapaLoadingService.getLanguageConstants(this.lang)?.languageConstant;
           console.log('====================================');
           console.log(this.selectedLang, this.lang);
           console.log('====================================');

@@ -1,3 +1,16 @@
+
+@font-face {
+  font-family: 'NotoIKEAArabic_Latin-Regular';
+  src: url('^assets/NotoIKEAArabic_Latin-Regular.woff2') format('woff2'),
+       url('^assets/NotoIKEAArabic_Latin-Regular.woff') format('woff');
+  font-weight: regular;
+  font-style: normal;
+
+}
+*{
+  font-family: 'NotoIKEAArabic_Latin-Regular', Arial, Helvetica, sans-serif;
+}
+
 .loading-container {
   height: 100%;
   position: fixed;
