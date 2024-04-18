@@ -1,6 +1,6 @@
 {
-  "name": "ngx-skapa-loading",
-  "version": "1.5.0",
+  "name": "ngx-bouncing-ball-loader",
+  "version": "0.0.1",
   "peerDependencies": {
     "@angular/common": "^17.3.0",
     "@angular/core": "^17.3.0",

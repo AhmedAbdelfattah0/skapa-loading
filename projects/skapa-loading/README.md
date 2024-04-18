@@ -12,7 +12,7 @@ NGX SKAPA LOADING is an Angular library for loading-page showing a dynamically m
 Use the package manager [npm](https://nodejs.org/en) to install SKAPA-LOADING.
 
 ```npm
-npm install skapa-loading
+npm install ngx-bouncing-ball-loader
 ```
 
 ## Usage
