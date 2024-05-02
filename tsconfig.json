@@ -18,6 +18,9 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "paths": {
+      "common-error-modal": [
+        "./dist/common-error-modal"
+      ],
       "skapa-loading": [
         "./dist/skapa-loading"
       ]

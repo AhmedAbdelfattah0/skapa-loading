@@ -1,0 +1,57 @@
+<skapa-prompt [open]="model.errorModel.modalService.openDialog | async">
+  <skapa-modal-header slot="header"> <span slot="closebutton-label">Exit dialog</span> </skapa-modal-header>
+  @if(modalData?.errType!='CONFIRMATION') {
+  <h2 slot="title" class="title-for-error-case" [dir]="direction">
+    {{selectedLang[modalData?.errType]}}</h2>
+  }
+  @if(modalData?.errType=='CONFIRMATION') {
+  <h2 slot="title" class="title-for-error-case" [dir]="direction">
+    {{selectedLang[modalData?.title]}}</h2>
+  }
+  @if(modalData?.errType=='CONFIRMATION') {
+  <div class="max-width">
+    {{ modalData?.disc}}
+  </div>
+  }
+  @if(modalData?.errType!='CONFIRMATION') {
+  <div class="max-width">
+    {{ selectedLang[modalData?.disc]}}
+  </div>
+  }
+
+  @if(modalData?.showInput) {
+  <div class="password-input-container-on-delete-account">
+
+
+    <skapa-input-field auto-id="password">
+      <label slot="label">{{selectedLang.PASSWORD}}</label>
+      <input [formControl]="inputValue" name="password" [type]="showPassword === false ? 'password' : 'text'" required
+        minlength="8">
+      <skapa-icon-button slot="action" (click)="showPassword=!showPassword">
+        <skapa-icon *ngIf="!showPassword" slot="icon" icon="visibility-show"></skapa-icon>
+        <skapa-icon *ngIf="showPassword" slot="icon" icon="visibility-hide"></skapa-icon>
+        <span>Reveal password</span>
+      </skapa-icon-button>
+      <skapa-helper-text slot="helper"></skapa-helper-text>
+    </skapa-input-field>
+  </div>
+
+
+  }
+
+
+  <skapa-modal-footer slot="footer" class="" (primary)="confirmButtonClick(modalData.errType)"
+    (secondary)="closeButtonClick()" primaryLead=true>
+
+
+    @if(modalData?.primaryBtn?.isVisible) {
+    {{selectedLang[modalData?.primaryBtn?.btnText]}}
+    }
+
+
+    @if(modalData?.secondaryBtn?.isVisible) {
+    <span slot="secondary">{{selectedLang[modalData?.secondaryBtn?.btnText]}}</span>
+    }
+
+  </skapa-modal-footer>
+</skapa-prompt>
