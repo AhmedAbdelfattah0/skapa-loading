@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { CUSTOM_ELEMENTS_SCHEMA, Component, DestroyRef, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, Component, DestroyRef, Injector, Input, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import '@ingka/modal-webc';
 import "@ingka/button-webc";
@@ -15,7 +15,7 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
   styles: ``,
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class CommonErrorModalComponent implements OnChanges {
+export class CommonErrorModalComponent implements OnChanges, OnDestroy {
   selectedLang: any;
   modalData: any;
   direction: any;
@@ -23,14 +23,17 @@ export class CommonErrorModalComponent implements OnChanges {
   showPassword: boolean = false;
   @Input() lang: 'en' | 'ar' = 'en';
   @Input() selectedLanguageConstants: any;
+  public model: CommonErrorModalViewModel;
+   constructor( injector:Injector) {
+     this.model = injector.get(CommonErrorModalViewModel)
 
-  constructor(public model: CommonErrorModalViewModel, private destroyRef: DestroyRef) {
 
-    this.model.modalData.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(res => {
+    this.model.modalData.subscribe(res => {
       this.modalData = res
     })
 
   }
+
 
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -54,5 +57,9 @@ export class CommonErrorModalComponent implements OnChanges {
 
   closeButtonClick() {
     this.model.closeButtonEvent();
+  }
+
+  ngOnDestroy(): void {
+    this.model.modalData.unsubscribe()
   }
 }

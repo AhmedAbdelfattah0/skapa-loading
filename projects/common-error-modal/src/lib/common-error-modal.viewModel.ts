@@ -1,4 +1,4 @@
- import { DestroyRef, EventEmitter, Injectable, Injector } from "@angular/core";
+ import { DestroyRef, EventEmitter, Injectable, Injector, OnDestroy } from "@angular/core";
  import { BehaviorSubject, of, takeUntil } from 'rxjs';
  import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { ErrorModel } from "./error.model";
@@ -6,17 +6,23 @@ import { CommonErrorModalService } from "./common-error-modal.service";
 
 
 @Injectable({ providedIn: 'root' })
-export class CommonErrorModalViewModel   {
-  modalData:BehaviorSubject<any> =new BehaviorSubject(null)
-  constructor( private destroyRef: DestroyRef, public errorModel: ErrorModel){
+export class CommonErrorModalViewModel implements OnDestroy  {
+  modalData:BehaviorSubject<any> =new BehaviorSubject(null);
+  public errorModel: ErrorModel
+  constructor( injector:Injector){
+this.errorModel=injector.get(ErrorModel)
+  }
 
-    this.errorModel.modalService.modalData.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(res => {
+  ngOnInit() {
+    this.errorModel.modalService.modalData.subscribe(res => {
       this.modalData.next(res)
     })
   }
-  // confirmButtonEvent(modalType){
-  //   return  this.commonErrorModalComponentService.confirmButtonEvent(modalType)
-  // }
+
+
+  ngOnDestroy() {
+    this.errorModel.modalService.modalData.unsubscribe()
+  }
 
   closeButtonEvent(){
     return this.errorModel.closeModalFunc()
