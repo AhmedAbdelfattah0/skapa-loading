@@ -1,4 +1,4 @@
-<skapa-prompt [open]="model.errorModel.modalService.openDialog | async">
+<skapa-prompt [open]="CommonErrorModalService.openDialog | async">
   <skapa-modal-header slot="header"> <span slot="closebutton-label">Exit dialog</span> </skapa-modal-header>
   @if(modalData?.errType!='CONFIRMATION') {
   <h2 slot="title" class="title-for-error-case" [dir]="direction">

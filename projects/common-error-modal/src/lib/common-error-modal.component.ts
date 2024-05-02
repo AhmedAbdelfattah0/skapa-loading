@@ -4,8 +4,8 @@ import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angu
 import '@ingka/modal-webc';
 import "@ingka/button-webc";
 import '@ingka/icon-webc';
- import { CommonErrorModalViewModel } from './common-error-modal.viewModel';
-import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
+ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
+import { CommonErrorModalService } from './common-error-modal.service';
 
 @Component({
   selector: 'lib-common-error-modal',
@@ -23,12 +23,10 @@ export class CommonErrorModalComponent implements OnChanges, OnDestroy {
   showPassword: boolean = false;
   @Input() lang: 'en' | 'ar' = 'en';
   @Input() selectedLanguageConstants: any;
-  public model: CommonErrorModalViewModel;
-   constructor( injector:Injector) {
-     this.model = injector.get(CommonErrorModalViewModel)
+    constructor( public CommonErrorModalService: CommonErrorModalService) {
 
 
-    this.model.modalData.subscribe(res => {
+    this.CommonErrorModalService.modalData.subscribe(res => {
       this.modalData = res
     })
 
@@ -38,7 +36,7 @@ export class CommonErrorModalComponent implements OnChanges, OnDestroy {
 
   ngOnChanges(changes: SimpleChanges): void {
 
-    this.direction = this.model.getLanguageConstants(this.lang)?.direction
+    this.direction = this.CommonErrorModalService.getLanguageConstants(this.lang)?.direction
     this.selectedLang = this.selectedLanguageConstants
   }
 
@@ -49,17 +47,17 @@ export class CommonErrorModalComponent implements OnChanges, OnDestroy {
 
   confirmButtonClick(modalType) {
     if (this.inputValue.value && this.inputValue.value !== "") {
-      this.model.confirmButtonEvent(modalType, this.inputValue.value);
+      this.CommonErrorModalService.confirmButtonTarget(modalType, this.inputValue.value);
     } else {
-      this.model.confirmButtonEvent(modalType);
+      this.CommonErrorModalService.confirmButtonTarget(modalType);
     }
   }
 
   closeButtonClick() {
-    this.model.closeButtonEvent();
+    this.CommonErrorModalService.closeErrorDailog();
   }
 
   ngOnDestroy(): void {
-    this.model.modalData.unsubscribe()
+    this.CommonErrorModalService.modalData.unsubscribe()
   }
 }
